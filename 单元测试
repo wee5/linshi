@@ -1,0 +1,198 @@
+一．测试
+1	测试分类
+1.1	理论分类
+白盒测试：允许测试人员利用程序内部逻辑结构及 相关信息，设计或选择测试用例，对程式所有逻辑路径进行测试
+灰盒测试：
+黑盒测试：测试人员完全不考虑逻辑结构和内部特性， 只依据程式的需求说明书来检查程式的功能是否满足它的功能说明
+1.2	测试分类
+单元测试（白盒测试）
+集成测试（灰盒测试）：在单元测试的基础上，对单元模块之间的连接和组装进行测试
+系统测试（黑盒测试）：在所有都考虑的情况下，对系统进行测试
+验收测试：第三方进行的确认软件满足需求的测试
+自动化测试
+Web测试
+二．单元测试
+2	单元测试的目的
+在于发现各模块内部可能存在的各种错误，主要包括以下几个方面：
+(1)验证代码是与设计相符合的。
+(2)发现设计和需求中存在的错误。
+(3)发现在编码过程中引入的错误。
+3	模拟的意义
+要测试的方法会引用很多外部依赖的对象，比如：（发送邮件，网络通讯，远程服务, 文件系统等等）。 而我们没法控制这些外部依赖的对象，所以需要模拟这些对象，来完成单元测试
+4	单元测试的重点
+单元测试主要是针对系统最基本的单元代码进行测试，测试时主要从接口、独立路径、出错处理、边界条件和局部数据五个方面进行测试，通过这五个方面来检查模块内部是否存在错误。
+4.1	接口测试
+接口测试主要是对函数数据的输入和输出进行测试，主要包括以下几个方面的内容：
+1)调用所测模块时的输入参数与模块的形式参数在个数、属性、顺序上是否匹配。
+2)所测模块调用子模块时，它输入给子模块的参数与子模块中的形式参数在个数、属性、顺序上是否匹配。
+3)是否修改了只用作输入的形式参数
+4）输出给标准函数的参数在个数、属性、顺序上是否正确。
+5）全局变量的定义在各个模块中是否一致。
+6）约束条件是否通过形式参数来传送
+4.2	独立路径测试
+独立路径主要测试程序的运行路径是否存在错误，对基本执行路径和循环进行测试容易发现大量的错误，设计测试用例查找由于错误的计算、不正确的比较或不正常的控制流而导致的错误。主要包括以下几个方面的内容：
+1)运算的优先次序不正确或误解了运算的优先次序：如+和-运算符的优先级高于>>和<<操作符。
+2)运算的方式错误：如本来希望a=++b，而错误地写成了a=b++。
+3)不同数据类型的比较：如a为unsigned类型，b为int类型，执行while(a>b)语句时很容易出现死循环，因为a为无符号类型。
+4)“差1错”，即循环的次数多了一次或少了一次：如for(i=0;i<=100;i++)，本来只希望循环100次，结果循环了101次。
+5)错误的或不可能的循环终止条件：如while(|a|<0)这个条件永远不可能正确。
+6)关系表达式中不正确的变量和比较符：如将等号写成了赋值符，if(a==1)写成了if(a=1)。
+7)当遇到发散的迭代时不能终止循环。
+8)循环变量修改错误：while(i){循环体中错误地修改i的值,使得循环次数错误}。
+4.3	出错处理测试
+比较完善的单元设计要求能预见出错的条件，并设置适当的出错处理，以便在程序出错时，能对出错程序重新做安排，保证其逻辑上的正确性。主要包括以下几个方面的内容：
+1)出错的描述难以理解：如用户登录失败提示“Errorcode001”，该提示信息不易理解。
+2)出错的描述不足以对错误定位和确定出错的原因：如网络无法连接时，提示“网络连接失败”。
+3)显示的错误与实际的错误不符：如用户名输入错误时，提示“密码错误”。
+4)对错误条件的处理不正确：如注册邮箱，提示输入的用户名格式错误，但还能正确地注册一个账号。
+5)在对错误进行处理之前，错误条件已经引起系统的干预等。
+4.4	边界条件测试
+边界条件测试主要测试函数对循环条件、控制条件、数据流等临界值的处理情况，主要包括以
+下几个方面的内容：
+1)在n次循环的第n次，取最大值或最小值时容易发生错误。
+2)特别要注意数据流、控制流中等于、大于、小于确定的比较值时出现错误的可能性。
+4.5	局部数据结构测试
+局部数据结构测试主要测试对数据定义是否存在错误，包括以下几个方面的内容：
+1)检查不正确或不一致的数据类型说明：如将a的类型设置为unsighedint类型，如果将a<0设置为结束的条件，那么一定会进入死循环，因为a永远不可能为负数。
+2)使用尚未赋值或尚未初始化的变量。
+3)错误的初始值或错误的缺省值：如inta=65536，会导致a实际的值为0。
+4)变量名拼写错误或书写错误。
+5)不一致的数据类型：如inta和floatb，如果运行a=b，那么会导致精度丢失
+5	 框架分类
+5.1	单元测试框架
+Junit
+TestNG
+5.2	模拟框架
+Mockito
+PowerMock
+三．Junit4
+6	先补充一部分，如何使用Matchers
+参考	https://blog.csdn.net/u011054333/article/details/54565664
+assertThat(x, is(3));
+assertThat(x, is(not(4)));
+assertThat(responseString, either(containsString("color")).or(containsString("colour")));
+assertThat(myList, hasItem("3"));
+Hamcrest，这个包中就定义着大量谓语
+忽略测试，测试超时
+
+四．PowerMock
+PowerMock是一个Java模拟框架，用于解决测试问题
+参考	https://www.cnblogs.com/lovezmc/p/11232112.html
+
+7	优点
+可以mock静态、final、私有方法等，这也是其他测试框架jMock,EasyMock,Mockito的缺点
+8	依赖
+<!-- PowerMock JUnit 4.4+ Module -->
+<dependency>
+　　<groupId>org.powermock</groupId>
+　　<artifactId>powermock-module-junit4</artifactId>
+　　<version>2.0.0</version>
+　　<scope>test</scope>
+</dependency>
+<!-- PowerMock Mockito2 API -->
+<dependency>
+　　<groupId>org.powermock</groupId>
+　　<artifactId>powermock-api-mockito2</artifactId>
+　　<version>2.0.0</version>
+　　<scope>test</scope>
+</dependency>
+<dependency>
+　　<groupId>junit</groupId>
+　　<artifactId>junit</artifactId>
+　　<version>4.11</version>
+　　<scope>test</scope>
+</dependency>
+9	重要注解说明
+@RunWith(PowerMockRunner.class) // 告诉JUnit使用PowerMockRunner进行测试
+@PrepareForTest({RandomUtil.class}) // 所有需要测试的类列在此处，适用于模拟final类或有final, private, static, native方法的类
+@PowerMockIgnore("javax.management.*") //为了解决使用powermock后，提示classloader错误
+10	使用
+10.1	类级注解
+10.1.1	@RunWith(PowerMockRunner.class)：告诉JUnit使用PowerMockRunner进行测试
+10.1.2	@PrepareForTest({MockUtil.class})：所有需要测试的类列在此处，适用于模拟final, private, static,native的方法
+10.1.3	@PowerMockIgnore(“javax.management.*”)为了解决使用powermock后，提示classloader错误
+10.1.4	若不需要使用powerMock的对静态，私有等方法的模拟，可以不用@PrepareForTest注解，继而可以不用@RunWith(PowerMockRunner.class)
+(不需要利用反射重构时，可以不用该注解？？)
+10.2	依赖注入：@InjectMocks
+10.3	模拟对象：@Mock；将该对象的所有方法置空
+@Spy可以创建部分mock的对象，部分mock对象的所有成员方法都会按照原方法的逻辑执行，直到被打桩返回某个具体的值
+@Mock和PowerMockito.mock()的区别？？？
+10.4	模拟对象：File file = PowerMockito.mock(File.class)
+10.5	模拟普通方法：PowerMockito.when(CLASS.METHOD().thenReturn(EXCEPTVALUE)
+10.6	模拟静态方法：	PowerMockito.mockStatic(MockUtil.class); PowerMockito.when(MockUtil.nextInt(10)).thenReturn(7);
+10.7	模拟方法内new出来的对象：@PrepareForTest({被测试类.class})
+PowerMockito.whenNew(File.class).withArguments("abc").thenReturn(file)
+10.8	断言：略
+11	Mock对象的初始值
+参考		https://www.cnblogs.com/fnlingnzb-learner/p/10635250.html
+11.1	属性初始值
+1.	int 类型方法默认返回 0
+2.	long[] 类型方法默认返回 null
+3.	Double 类型方法默认返回 0.0
+4.	string 类型方法默认返回 null
+5.	Optional<String> 类型方法默认返回 Optional.empty
+6.	Collection<String> 类型方法默认返回 new LinkedList<String>(0)
+7.	Map<String, String> 类型方法默认返回 new HashMap<String, String>(0)
+11.2	方法初始值
+五．Powermock官方文档
+11.3	阅读须知
+instanceClassType：a.class；和classType是一样的意思
+12	介绍
+12.1	优势
+可以模拟静态方法，私有方法和最终方法（只有powermock可以这样）
+删除静态初始化程序
+允许在不依赖注入的情况下进行模拟（注入消耗大，注入特殊实例设计打破单例模式，并增加单例实例被修改的可能）
+PowerMock通过在执行测试时在运行时修改字节码来实现这些技巧
+12.2	Powermock的加载类
+默认情况下，PowerMock使用其MockClassLoader加载所有类，并修改了所有类，除了：
+•	系统类。它们被推迟到系统类加载器
+•	位于指定为忽略的包中的类
+
+12.3	配置文件
+configuration.properties放在资源路径下，为全局配置，适用于所有测试类
+12.4	旁路封装（绕过封装）
+旁路封装是利用java反射机制重构代码，并非powermock的功能，且容易出错，由开发者决定是否使用此技术
+当无访问权限（私有的，无get方法）时，获取和修改非公共字段
+12.4.1	访问内部状态：White.getInternalState(instance,fieldName)
+12.4.2	设置内部状态：White.setInternalState(instance,fieldName,newValue)
+父类中的字段:
+	获取
+	White.<castType>getInternalState(instance,fieldName,superClassType)
+	White.getInternalState(instance,fieldType,superClassType)
+	White.getIntanceState(instance,fieldname,superClassType,castType)
+	设置
+	White.setInternalState(instance,fieldname,newValue,castType)
+	White.setInternalState(instance,fieldType,newValue,castType)
+12.4.3	调用私有方法
+调用方法：White.<castType>invokeMethod(instance,methodName,params)
+White.<castType>invokeMethod(instance,new Class<?>[]{paramClassType},methodName,params)
+调用静态方法：White.invokeMethod(instance.Class,methodName,params)
+White.invokeMethod(instance,params)(powmock唯一基于参数定位的方法)
+12.4.4	私有构造函数
+White.invokeConstructor(instanceClassType,43)(为什么没有指定参数)
+White.invokeConstructor(instanceClassType,new Class<?>[]{paramClassType },43)
+12.5	行为抑制
+用于抑制构造方法，方法，静态初始化程序。经典例子，需要扩展一个第三方框架的类，该类的构造方法中的某些行为使单元测试变得困难，于是需要抑制其构造方法
+12.5.1	禁止父类构造方法
+抑制构造函数：suppress(constructor(superClassType)（增加参数classType来指定构造方法）
+不使用构造方法来创建实例：White.newInstance(instanceClassType)
+12.5.2	抑制方法
+suppress(method(classType,methodName))
+12.5.3	抑制静态初始化器（静态构造方法）
+@SuppressStaticInitializationFor(“全限定名”)（类级）
+12.5.4	抑制字段
+Suppress(field(classType,instanceName))
+13	测试监听器（类级）
+13.1	@PowerMockListener(AnnotiationEnabler.class)：允许使用注解创建模拟对象
+@Mock(“methodName”)：部分模拟，不要括号内容则模拟整个对象
+13.2	@PowerMockListener(FieldDefaulter.class)：每次测试完一次都将传参的设置清空
+
+六．单元测试规范（中软）
+14	编写格式
+ 
+ 
+测试异常时，catch异常并断言比较
+测试赋值时，方法申明throws异常
+15	单元测试不成功时
+15.1	覆盖率工具查看覆盖的代码，确定代码的执行流程
+15.2	Debug查看参数的具体信息，再做修改
