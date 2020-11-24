@@ -1,0 +1,36 @@
+变量指向内存对象，而不是另一个变量
+@Test
+    public void test() {
+        String s = "a";
+        String s2 = s;
+        s = "b";
+        System.out.println(s2);
+
+        Man x = new Man("weezy");
+        Man y = x;
+        x = new Man("hov");
+        System.out.println(y.name);
+
+        Man n = new Man("riri");
+        Man m = n;
+        n.setName("breezy");
+        System.out.println(m.name);
+
+        int i = 1;
+        int j = i;
+        i = 2;
+        System.out.println(j);
+
+    }
+
+    class Man {
+        String name;
+
+        public Man(String name) {
+            this.name = name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+    }
