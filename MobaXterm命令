@@ -1,0 +1,6 @@
+sel ordercore
+go ppbcb 进入
+log 直接进入日志目录
+less 查看
+zless 查看压缩包
+zgrep '关键字' order*
