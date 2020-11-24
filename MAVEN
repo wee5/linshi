@@ -1,0 +1,40 @@
+《安装maven》
+	安装解压
+	环境变量配置：
+		MAVEN_HOME，赋值D:\Program Files\Apache\maven
+		Path，追加%MAVEN_HOME%\bin
+	检查maven是否安装成功：mvn -version
+	在settiing.xml文件中，将<localRepository>标签移除注释，并设置一个值，指定maven的本地仓库
+	运行mvn help:system，仓库中会多出一些基本插件
+
+《idea配置maven》
+	file>settings>build compile>maven，配置三项：maven目录，settings文件，本地仓库
+
+《工作自定义配置maven时需要改变的步骤》
+	将setting文件替换为指定的setting文件，idea配置maven中，将setting文件地址改为指定的setting文件地址
+
+《两个setting.xml比较》
+	original：刚下载maven时，自带的setting提供默认配置，并解释其作用，所以的配置都被注释掉了
+	仅仅写了命名空间，xml版本和编码格式
+	work：配置本地仓库，镜像地址，许多用户配置文件profile，pluginGroup，activeProfile
+
+
+《setting中的配置解释》
+	镜像地址，加快依赖下载速度
+	本地仓库，用来存放插件依赖等。项目打包后也会成为依赖放在本地仓库
+	settings.xml默认的本地仓库地址是 ${user.home}/.m2/repository（同样是被注释掉，不会生效）
+
+
+《开始构建项目》
+	将项目导入idea
+	刷新maven，maven会检测到本地仓库的插件等工具
+	若是已存在的项目，则clean一下，清除上一次编译生成的文件
+	compile编译项目
+
+
+
+
+
+
+
+
