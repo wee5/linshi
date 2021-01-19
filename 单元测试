@@ -11,6 +11,7 @@
 验收测试：第三方进行的确认软件满足需求的测试
 自动化测试
 Web测试
+
 二．单元测试
 2	单元测试的目的
 在于发现各模块内部可能存在的各种错误，主要包括以下几个方面：
@@ -65,6 +66,7 @@ TestNG
 5.2	模拟框架
 Mockito
 PowerMock
+
 三．Junit4
 6	先补充一部分，如何使用Matchers
 参考	https://blog.csdn.net/u011054333/article/details/54565664
@@ -134,6 +136,7 @@ PowerMockito.whenNew(File.class).withArguments("abc").thenReturn(file)
 6.	Collection<String> 类型方法默认返回 new LinkedList<String>(0)
 7.	Map<String, String> 类型方法默认返回 new HashMap<String, String>(0)
 11.2	方法初始值
+
 五．Powermock官方文档
 11.3	阅读须知
 instanceClassType：a.class；和classType是一样的意思
